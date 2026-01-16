@@ -640,33 +640,21 @@ require("lazy").setup({
         local filename = vim.fn.expand("%:t")
 
         local commands = {
-          python = "clear && echo 'Running: " ..
-          filename .. "' && python3 '" .. filepath .. "' ; echo '\nPress Enter to close' && read",
-          javascript = "clear && echo 'Running: " ..
-          filename .. "' && node '" .. filepath .. "' ; echo '\nPress Enter to close' && read",
-          typescript = "clear && echo 'Running: " ..
-          filename .. "' && ts-node '" .. filepath .. "' ; echo '\nPress Enter to close' && read",
-          lua = "clear && echo 'Running: " ..
-          filename .. "' && lua '" .. filepath .. "' ; echo '\nPress Enter to close' && read",
-          go = "clear && echo 'Running: " ..
-          filename .. "' && go run '" .. filepath .. "' ; echo '\nPress Enter to close' && read",
+          python = "clear && echo 'Running: " .. filename .. "' && python3 '" .. filepath .. "'",
+          javascript = "clear && echo 'Running: " .. filename .. "' && node '" .. filepath .. "'",
+          typescript = "clear && echo 'Running: " .. filename .. "' && ts-node '" .. filepath .. "'",
+          lua = "clear && echo 'Running: " .. filename .. "' && lua '" .. filepath .. "'",
+          go = "clear && echo 'Running: " .. filename .. "' && go run '" .. filepath .. "'",
           rust = "clear && echo 'Running: " ..
-          filename ..
-          "' && rustc '" .. filepath .. "' && ./" .. vim.fn.expand("%:t:r") .. " ; echo '\nPress Enter to close' && read",
-          cpp = "clear && echo 'Running: " ..
-          filename .. "' && g++ '" .. filepath .. "' -o /tmp/a.out && /tmp/a.out ; echo '\nPress Enter to close' && read",
-          c = "clear && echo 'Running: " ..
-          filename .. "' && gcc '" .. filepath .. "' -o /tmp/a.out && /tmp/a.out ; echo '\nPress Enter to close' && read",
+              filename .. "' && rustc '" .. filepath .. "' && ./" .. vim.fn.expand("%:t:r"),
+          cpp = "clear && echo 'Running: " .. filename .. "' && g++ '" .. filepath .. "' -o /tmp/cpp_out && /tmp/cpp_out",
+          c = "clear && echo 'Running: " .. filename .. "' && gcc '" .. filepath .. "' -o /tmp/c_out && /tmp/c_out",
           java = "clear && echo 'Running: " ..
-          filename ..
-          "' && javac '" ..
-          filepath ..
-          "' && java -cp " ..
-          vim.fn.expand("%:p:h") .. " " .. vim.fn.expand("%:t:r") .. " ; echo '\nPress Enter to close' && read",
-          sh = "clear && echo 'Running: " ..
-          filename .. "' && bash '" .. filepath .. "' ; echo '\nPress Enter to close' && read",
-          bash = "clear && echo 'Running: " ..
-          filename .. "' && bash '" .. filepath .. "' ; echo '\nPress Enter to close' && read",
+              filename ..
+              "' && cd '" ..
+              vim.fn.expand("%:p:h") .. "' && javac '" .. filename .. "' && java '" .. vim.fn.expand("%:t:r") .. "'",
+          sh = "clear && echo 'Running: " .. filename .. "' && bash '" .. filepath .. "'",
+          bash = "clear && echo 'Running: " .. filename .. "' && bash '" .. filepath .. "'",
         }
 
         local cmd = commands[filetype]
